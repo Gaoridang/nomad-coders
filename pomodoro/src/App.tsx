@@ -1,12 +1,8 @@
 import './App.css';
-import Box from './components/Box';
+import Pomodoro from './components/Pomodoro';
 
 function App() {
-  return (
-    <>
-      <Box />
-    </>
-  );
+  return <Pomodoro />;
 }
 
 export default App;
