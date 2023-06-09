@@ -36,6 +36,7 @@ const Timer = () => {
                 clearInterval(intervalRef.current);
                 intervalRef.current = null;
               }
+              setCountSec(0);
               return 0;
             }
           });
