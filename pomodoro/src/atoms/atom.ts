@@ -2,22 +2,12 @@ import { atom } from 'recoil';
 
 export const minutesState = atom({
   key: 'minutes',
-  default: 25,
+  default: 0,
 });
 
 export const secondsState = atom({
   key: 'seconds',
-  default: 0,
-});
-
-export const countMinState = atom({
-  key: 'countMin',
-  default: 0,
-});
-
-export const countSecState = atom({
-  key: 'countSec',
-  default: 0,
+  default: 5,
 });
 
 export const roundState = atom({
@@ -27,5 +17,10 @@ export const roundState = atom({
 
 export const goalState = atom({
   key: 'goals',
+  default: 0,
+});
+
+export const idState = atom<number | null>({
+  key: 'id',
   default: 0,
 });
