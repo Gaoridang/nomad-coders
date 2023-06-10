@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SetTime from './SetTime';
 import Timer from './Timer';
 import { useRecoilValue } from 'recoil';
-import { idState } from '../atoms/atom';
+import { idState } from '../data/atom';
 import styled from 'styled-components';
 
 const timer = {

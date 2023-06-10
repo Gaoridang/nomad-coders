@@ -1,11 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { goalState, idState, minutesState, roundState, secondsState } from '../atoms/atom';
+import { goalState, idState, minutesState, roundState, secondsState } from '../data/atom';
 import { IoIosPlay, IoIosPause } from 'react-icons/io';
 import { IoStopSharp, IoCloseSharp } from 'react-icons/io5';
 import { LuTimerReset } from 'react-icons/lu';
 import styled from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useAnimationControls,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
 
 const Timer = () => {
   const minutes = useRecoilValue(minutesState);
@@ -18,6 +24,7 @@ const Timer = () => {
 
   const intervalRef = useRef<number | null>(null);
 
+  // Making Start, Pause, Stop, and Reset Button.
   const start = useCallback(() => {
     if (intervalRef.current !== null) return;
 
@@ -31,7 +38,7 @@ const Timer = () => {
           return minutes * 60 + seconds;
         }
       });
-    }, 100);
+    }, 1000);
   }, [minutes, seconds]);
 
   const min = Math.floor(count / 60);
@@ -48,7 +55,7 @@ const Timer = () => {
 
       setTimeout(() => {
         setCount(minutes * 60 + seconds);
-      }, 100);
+      }, 1000);
     }
 
     if (rounds === 4) {
@@ -60,17 +67,6 @@ const Timer = () => {
       setGoals(0);
     }
   }, [count, goals, setGoals, setRunning, minutes, seconds, setRounds, rounds]);
-
-  const reset = useCallback(() => {
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-    }
-    intervalRef.current = null;
-    setCount(minutes * 60 + seconds);
-    setRounds(0);
-    setGoals(0);
-    setRunning(false);
-  }, [minutes, seconds, setGoals, setRunning, setRounds]);
 
   const pause = useCallback(() => {
     if (intervalRef.current !== null) {
@@ -89,9 +85,51 @@ const Timer = () => {
     setRunning(false);
   }, [setRunning, minutes, seconds]);
 
+  const reset = useCallback(() => {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = null;
+    setCount(minutes * 60 + seconds);
+    setRounds(0);
+    setGoals(0);
+    setRunning(false);
+  }, [minutes, seconds, setGoals, setRunning, setRounds]);
+
+  // Overlay Animation
+  const x = useMotionValue(minutes * 60 + seconds);
+
+  useEffect(() => {
+    x.set(count);
+  }, [x, count]);
+
+  const xInput = [minutes * 60 + seconds, 0];
+  const scaleY = useTransform(x, xInput, [0, 1]);
+
+  // Timer Animation
+  const controlSec = useAnimationControls();
+  const controlMin = useAnimationControls();
+
+  useEffect(() => {
+    controlSec.set({ y: 20, opacity: 0.5 });
+    controlSec.start({
+      y: 0,
+      opacity: 1,
+    });
+  }, [controlSec, sec]);
+
+  useEffect(() => {
+    controlMin.set({ y: 20, opacity: 0.5 });
+    controlMin.start({
+      y: 0,
+      opacity: 1,
+    });
+  }, [controlMin, min]);
+
   return (
     <AnimatePresence>
-      <Wrapper>
+      <Overlay key="overlay" style={{ scaleY }} />
+      <Wrapper key="wrapper">
         <Container>
           <IoCloseSharp
             size={20}
@@ -114,11 +152,11 @@ const Timer = () => {
           {/* Time */}
           <TimeWrapper>
             <Time>
-              {String(min).padStart(2, '0')}
+              <motion.h3 animate={controlMin}>{String(min).padStart(2, '0')}</motion.h3>
               <span>minutes</span>
             </Time>
             <Time>
-              {String(sec).padStart(2, '0')}
+              <motion.h3 animate={controlSec}>{String(sec).padStart(2, '0')}</motion.h3>
               <span>seconds</span>
             </Time>
           </TimeWrapper>
@@ -166,6 +204,15 @@ const Timer = () => {
 
 export default Timer;
 
+const Overlay = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  background-color: #4200f9;
+  position: absolute;
+  transform-origin: 50% 0%;
+  opacity: 0.3;
+`;
+
 const Wrapper = styled(motion.div)`
   width: 100vw;
   height: 100vh;
@@ -173,6 +220,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 `;
 
 const Container = styled.div`
@@ -199,9 +247,13 @@ const Time = styled(motion.div)`
   justify-content: center;
   align-items: center;
   padding: 30px;
-  font-size: 100px;
   width: 200px;
   height: 200px;
+
+  h3 {
+    font-size: 100px;
+    font-weight: 500;
+  }
 
   span {
     font-size: 20px;
@@ -261,7 +313,7 @@ const Object = styled(motion.div)`
   font-size: 30px;
   column-gap: 50px;
   font-weight: 300;
-  margin: 10px 0 25px 0;
+  margin: 0 0 25px 0;
   padding: 10px 20px;
   border-radius: 10px;
 
@@ -274,5 +326,6 @@ const Object = styled(motion.div)`
 
   p {
     font-size: 15px;
+    opacity: 0.5;
   }
 `;
