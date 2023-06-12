@@ -1,4 +1,4 @@
-const BASE_URL = 'https://movies-api.nomadcoders.workers.dev';
+export const BASE_URL = 'https://movies-api.nomadcoders.workers.dev';
 
 export async function getPopular() {
   return await fetch(`${BASE_URL}/popular`).then((r) => r.json());
@@ -16,15 +16,15 @@ export async function getMovie(id: string) {
   return await fetch(`${BASE_URL}/movie?id=${id}`).then((r) => r.json());
 }
 
-export async function makeImagePath(image: string) {
-  return await `https://image.tmdb.org/t/p/w500${image}`;
+export function makeImagePath(image: string) {
+  return `https://image.tmdb.org/t/p/w500${image}`;
 }
 
-export async function makeBgPath(image: string) {
-  return await `https://image.tmdb.org/t/p/original${image}`;
+export function makeBgPath(image: string) {
+  return `https://image.tmdb.org/t/p/original${image}`;
 }
 
-interface IMovie {
+export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -41,7 +41,7 @@ interface IMovie {
   vote_count: number;
 }
 
-export interface IMovieDetail extends IMovie {
+export interface MovieDetail extends Movie {
   belongs_to_collection: BelongsToCollection;
   budget: number;
   homepage: string;
@@ -86,7 +86,7 @@ interface SpokenLanguage {
   name: string;
 }
 
-export interface IAPIResponse {
+export interface APIResponse {
   page: number;
-  results: IMovie[];
+  results: Movie[];
 }
