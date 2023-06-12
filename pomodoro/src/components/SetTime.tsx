@@ -48,6 +48,3 @@ const Circle = styled(motion.div)`
 
 // useAnimationControls를 이용해서 숫자 모션 적용
 // 컴포넌트간 애니메이션을 위해 Pomodoro라는 상위 컴포넌트를 만들고 각각의 컴포넌트에 애니메이션 적용
-//
-
-//
