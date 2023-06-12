@@ -1,11 +1,14 @@
 import './App.css';
-import PopularMovies from './components/PopularMovies';
+import Header from './components/Header';
+import { Grid } from './components/commonStyle';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <PopularMovies />
-    </>
+    <Grid>
+      <Header />
+      <Outlet />
+    </Grid>
   );
 }
 
