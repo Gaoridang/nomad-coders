@@ -18,5 +18,12 @@ export const Container = styled.div`
   }
 
   @media only screen and (${breakPoints.device.md}) {
+    columns: 3;
+  }
+  @media only screen and (${breakPoints.device.sm}) {
+    columns: 2;
+  }
+  @media only screen and (${breakPoints.device.xs}) {
+    columns: 1;
   }
 `;
