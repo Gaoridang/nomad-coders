@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -27,9 +27,10 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 500;
 	line-height: 1;
+	padding: 40px;
 }
 ol, ul {
 	list-style: none;
@@ -47,9 +48,8 @@ table {
 	border-spacing: 0;
 }
 
-main {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+a {
+	text-decoration: none;
+	color: inherit;
 }
 `;
