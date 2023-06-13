@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import ComingSoonMovies from '../components/movies/ComingSoonMovies';
-import NowPlayingMovies from '../components/movies/NowPlayingMovies';
-import PopularMovies from '../components/movies/PopularMovies';
+import Comings from '../components/Comings';
+import Playings from '../components/Playings';
+import Populars from '../components/Populars';
 
 const router = createBrowserRouter([
   {
@@ -11,15 +11,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <PopularMovies />,
+        element: <Populars />,
       },
       {
         path: 'coming-soon',
-        element: <ComingSoonMovies />,
+        element: <Comings />,
       },
       {
         path: 'now-playing',
-        element: <NowPlayingMovies />,
+        element: <Playings />,
       },
     ],
   },

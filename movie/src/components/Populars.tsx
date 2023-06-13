@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Movie, getPopular, makeImagePath } from '../../api/api';
-import { useQuery } from '@tanstack/react-query';
-import { Flex, MovieGrid, Img } from '../commonStyle';
+import { useEffect, useState } from "react";
+import { Movie, getPopular, makeImagePath } from "../api/api";
+import { useQuery } from "@tanstack/react-query";
+import { Container } from "./styles";
 
 const Header = () => {
   // 왜 data.results. 다음 자동 완성이 안 되지?
   const [populars, setPopulars] = useState<Movie[]>([]);
-  const { data, isLoading } = useQuery(['allPopularMovies'], getPopular);
+  const { data, isLoading } = useQuery(["allPopularMovies"], getPopular);
 
   useEffect(() => {
     // 이거 이렇게 써도 되나?
@@ -25,22 +25,16 @@ const Header = () => {
 
   return (
     <main>
-      <MovieGrid>
+      <Container>
         {isLoading
           ? // 로딩 모션 만들기!
-            'Loading...'
+            "Loading..."
           : populars.map((movie) => (
-              <Flex key={movie.id} width="300px" dir="column" align="flex-start">
-                <Img
-                  height="444px"
-                  width="296px"
-                  src={makeImagePath(movie.poster_path)}
-                  alt={movie.title}
-                />
-                <span>{movie.title}</span>
-              </Flex>
+              <div key={movie.id}>
+                <img src={makeImagePath(movie.poster_path)} alt={movie.title} />
+              </div>
             ))}
-      </MovieGrid>
+      </Container>
     </main>
   );
 };
