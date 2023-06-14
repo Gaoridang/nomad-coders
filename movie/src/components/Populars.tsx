@@ -1,8 +1,13 @@
-import { getPopular, makeImagePath } from "../api/api";
-import { Container } from "./styles";
+import { Movie, getPopular, makeImagePath } from "../api/api";
 import useMovies from "../hooks/useMovies";
+import Modal from "./Modal";
+import Movies from "./Movies";
+import { useState } from "react";
 
-const Header = () => {
+const Populars = () => {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedBgImg, setSelectedBgImg] = useState<string | null>(null);
   const { movies, isLoading, error } = useMovies(
     "allPopularMovies",
     getPopular
@@ -18,20 +23,23 @@ const Header = () => {
   //   fetchPopularMovies();
   // }, []);
 
+  const onClick = (movie: Movie) => {
+    setSelectedId(movie.id);
+    setSelectedImg(makeImagePath(movie.poster_path));
+    setSelectedBgImg(makeImagePath(movie.poster_path));
+  };
+
   return (
     <main>
-      <Container>
-        {isLoading
-          ? // 로딩 모션 만들기!
-            "Loading..."
-          : movies?.map((movie) => (
-              <div key={movie.id}>
-                <img src={makeImagePath(movie.poster_path)} alt={movie.title} />
-              </div>
-            ))}
-      </Container>
+      <Movies movies={movies} onClick={onClick} isLoading={isLoading} />
+      <Modal
+        setSelectedId={setSelectedId}
+        selectedId={selectedId}
+        selectedImg={selectedImg}
+        selectedBgImg={selectedBgImg}
+      />
     </main>
   );
 };
 
-export default Header;
+export default Populars;

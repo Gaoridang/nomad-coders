@@ -30,7 +30,8 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
 	line-height: 1;
-	padding: 40px;
+	color: ${(props) => props.theme.color.text};
+	background-color: ${(props) => props.theme.color.background};
 }
 ol, ul {
 	list-style: none;
@@ -51,5 +52,11 @@ table {
 a {
 	text-decoration: none;
 	color: inherit;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 `;
