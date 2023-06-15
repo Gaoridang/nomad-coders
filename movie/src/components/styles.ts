@@ -5,45 +5,49 @@ import { motion } from "framer-motion";
 export const Container = styled(motion.div)`
   position: relative;
   columns: 4;
-  column-gap: 20px;
+  column-gap: 28px;
   max-width: 1000px;
   padding: 0 20px;
 
   div {
-    display: inline-block;
     width: 100%;
-    margin-bottom: 20px;
-    background-color: #222222;
-
-    img {
-      width: 100%;
-    }
+    padding: 8px;
 
     div {
-      font-family: "Ubuntu", sans-serif;
-      font-weight: 500;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
+      display: inline-block;
+      width: 100%;
       background-color: #222222;
-      color: ${(props) => props.theme.color.background};
-      font-weight: 500;
-      padding: 10px;
-      margin: 0;
+
+      img {
+        width: 100%;
+      }
 
       div {
-        margin-top: 5px;
-        padding: 0;
+        font-family: "Ubuntu", sans-serif;
+        font-weight: 500;
+        box-sizing: border-box;
         display: flex;
-        flex-direction: row;
-        gap: 5px;
-        font-weight: 300;
-        font-size: 0.8rem;
+        flex-direction: column;
+        background-color: #222222;
+        color: ${(props) => props.theme.color.background};
+        font-weight: 500;
+        padding: 10px;
+        margin: 0;
 
-        span {
-          background-color: #000000;
-          border-radius: 2px;
-          padding: 3px;
+        div {
+          margin-top: 5px;
+          padding: 0;
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+          font-weight: 300;
+          font-size: 0.8rem;
+
+          span {
+            background-color: #000000;
+            border-radius: 2px;
+            padding: 3px;
+          }
         }
       }
     }
