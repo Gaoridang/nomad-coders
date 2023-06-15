@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { APIResponse, Movie } from "../api/api";
+import { APIResponse, Movie } from "../data/api";
 import { useEffect, useState } from "react";
 
 const useMovies = (

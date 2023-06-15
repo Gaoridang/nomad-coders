@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { MovieDetail, getMovie } from "../api/api";
+import { MovieDetail, getMovie } from "../data/api";
 import { useEffect, useState } from "react";
 
 const useDetails = (id: string) => {

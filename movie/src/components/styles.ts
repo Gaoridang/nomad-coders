@@ -7,16 +7,18 @@ export const Container = styled(motion.div)`
   columns: 4;
   column-gap: 28px;
   max-width: 1000px;
-  padding: 0 20px;
+  margin: 20px;
 
   div {
     width: 100%;
-    padding: 8px;
+    padding: 8px 8px 0 8px;
+    background-color: #222222;
+    margin-bottom: 10px;
 
     div {
       display: inline-block;
       width: 100%;
-      background-color: #222222;
+      padding: 0;
 
       img {
         width: 100%;
@@ -44,7 +46,7 @@ export const Container = styled(motion.div)`
           font-size: 0.8rem;
 
           span {
-            background-color: #000000;
+            background-color: #7d7d7d;
             border-radius: 2px;
             padding: 3px;
           }

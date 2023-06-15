@@ -1,4 +1,4 @@
-import { Movie, getComingSoon, makeImagePath } from "../api/api";
+import { Movie, getComingSoon, makeImagePath } from "../data/api";
 import useMovies from "../hooks/useMovies";
 import { useState } from "react";
 import Modal from "./Modal";

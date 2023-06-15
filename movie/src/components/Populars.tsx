@@ -1,4 +1,4 @@
-import { Movie, getPopular, makeImagePath } from "../api/api";
+import { Movie, getPopular, makeImagePath } from "../data/api";
 import useMovies from "../hooks/useMovies";
 import Modal from "./Modal";
 import Movies from "./Movies";

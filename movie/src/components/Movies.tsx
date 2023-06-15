@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
-import { Movie, makeImagePath } from "../api/api";
+import { Movie, makeImagePath } from "../data/api";
 import { Container } from "./styles";
+import useDetails from "../hooks/useDetails";
 
 const cardVariants: Variants = {
   initial: {
@@ -17,9 +18,9 @@ const cardVariants: Variants = {
 };
 
 interface Props {
-  onClick: (movie: Movie) => void;
   isLoading: boolean;
   movies: Movie[] | undefined;
+  onClick: (movie: Movie) => void;
 }
 
 const Movies = ({ onClick, isLoading, movies }: Props) => {
@@ -44,8 +45,7 @@ const Movies = ({ onClick, isLoading, movies }: Props) => {
                   <p>{movie.title}</p>
                   <div>
                     {movie.adult ? <span>19</span> : <span>All</span>}
-                    <span>{movie.popularity}</span>
-                    <span>d</span>
+                    <span>{movie.release_date}</span>
                   </div>
                 </div>
               </motion.div>

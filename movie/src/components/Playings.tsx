@@ -1,4 +1,4 @@
-import { Movie, getNowPlaying, makeImagePath } from "../api/api";
+import { Movie, getNowPlaying, makeImagePath } from "../data/api";
 
 import useMovies from "../hooks/useMovies";
 import { useState } from "react";
