@@ -7,6 +7,9 @@ const Container = styled(motion.div)<{ bgImg: string }>`
   position: fixed;
   inset: 0;
   overflow-y: scroll;
+  background-image: ${(props) =>
+    props.bgImg ? `url(${props.bgImg})` : "none"};
+  background-size: cover;
 
   &::before {
     content: "";

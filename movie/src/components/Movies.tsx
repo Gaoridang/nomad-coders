@@ -14,9 +14,8 @@ const Movies = ({ onClick, isLoading, movies }: Props) => {
       {isLoading
         ? "Loading"
         : movies?.map((movie) => (
-            <div key={movie.id}>
+            <motion.div key={movie.id} layoutId={`card-${movie.id}`}>
               <motion.img
-                layoutId={`card-${movie.id}`}
                 onClick={() => onClick(movie)}
                 src={makeImagePath(movie.poster_path)}
                 alt={movie.title}
@@ -29,7 +28,7 @@ const Movies = ({ onClick, isLoading, movies }: Props) => {
                   <span>d</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
     </Container>
   );
