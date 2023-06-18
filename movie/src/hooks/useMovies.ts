@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { APIResponse, Movie } from "../data/api";
+import { Movie } from "../data/api";
 import { useEffect, useState } from "react";
 
-const useMovies = (
-  queryKey: string,
-  callbackFn: () => Promise<APIResponse>
-) => {
-  const { data, error, isLoading } = useQuery([queryKey], callbackFn);
+const useMovies = (queryKey: string[], queryFn: () => Promise<any>) => {
+  const { data, error, isLoading } = useQuery(queryKey, queryFn);
   const [movies, setMovies] = useState<Movie[]>();
 
   useEffect(() => {
     data && setMovies(data.results);
   }, [data]);
+
+  if (error) {
+    return { error, isLoading };
+  }
 
   return { movies, error, isLoading };
 };

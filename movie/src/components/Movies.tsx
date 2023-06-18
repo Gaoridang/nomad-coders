@@ -1,7 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { Movie, makeImagePath } from "../data/api";
 import { Container } from "./styles";
-import useDetails from "../hooks/useDetails";
+import useMovies from "../hooks/useMovies";
 
 const cardVariants: Variants = {
   initial: {
@@ -18,16 +18,18 @@ const cardVariants: Variants = {
 };
 
 interface Props {
-  isLoading: boolean;
-  movies: Movie[] | undefined;
   onClick: (movie: Movie) => void;
+  queryKey: string[];
+  queryFn: () => Promise<any>;
 }
 
-const Movies = ({ onClick, isLoading, movies }: Props) => {
+const Movies = ({ onClick, queryKey, queryFn }: Props) => {
+  const { movies, isLoading, error } = useMovies(queryKey, queryFn);
+
   return (
     <Container>
       {isLoading
-        ? "Loading"
+        ? "Loading..."
         : movies?.map((movie) => (
             <motion.div
               key={movie.id}

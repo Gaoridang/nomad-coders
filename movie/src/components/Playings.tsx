@@ -1,6 +1,4 @@
 import { Movie, getNowPlaying, makeImagePath } from "../data/api";
-
-import useMovies from "../hooks/useMovies";
 import { useState } from "react";
 import Movies from "./Movies";
 import Modal from "./Modal";
@@ -16,10 +14,6 @@ const Playings = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [selectedBgImg, setSelectedBgImg] = useState<string | null>(null);
-  const { movies, isLoading, error } = useMovies(
-    "allPlayingMovies",
-    getNowPlaying
-  );
 
   const onClick = (movie: Movie) => {
     setSelectedId(movie.id);
@@ -29,7 +23,11 @@ const Playings = () => {
 
   return (
     <main>
-      <Movies movies={movies} onClick={onClick} isLoading={isLoading} />
+      <Movies
+        onClick={onClick}
+        queryKey={["allPlayingMovies"]}
+        queryFn={getNowPlaying}
+      />
       <Modal
         setSelectedId={setSelectedId}
         selectedId={selectedId}

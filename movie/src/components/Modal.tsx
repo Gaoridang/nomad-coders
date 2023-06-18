@@ -25,6 +25,7 @@ const Container = styled(motion.div)<{ bgImg: string }>`
   div {
     width: 700px;
     margin: 50px auto 0 auto;
+    z-index: 10;
 
     div {
       display: flex;

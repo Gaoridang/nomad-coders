@@ -1,7 +1,20 @@
-export const BASE_URL = 'https://movies-api.nomadcoders.workers.dev';
+import axios, { AxiosError } from "axios";
+
+export const BASE_URL = "https://movies-api.nomadcoders.workers.dev";
+
+// export async function getPopular() {
+//   return await fetch(`${BASE_URL}/popular`).then((r) => r.json());
+// }
 
 export async function getPopular() {
-  return await fetch(`${BASE_URL}/popular`).then((r) => r.json());
+  const controller = new AbortController();
+
+  return await axios
+    .get(`${BASE_URL}/popularx`, {
+      signal: controller.signal,
+    })
+    .then((res) => res.data)
+    .catch((err) => err);
 }
 
 export async function getNowPlaying() {

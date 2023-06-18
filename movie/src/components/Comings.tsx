@@ -1,5 +1,4 @@
 import { Movie, getComingSoon, makeImagePath } from "../data/api";
-import useMovies from "../hooks/useMovies";
 import { useState } from "react";
 import Modal from "./Modal";
 import Movies from "./Movies";
@@ -19,14 +18,10 @@ const Comings = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [selectedBgImg, setSelectedBgImg] = useState<string | null>(null);
-  const { movies, isLoading, error } = useMovies(
-    "allComingMovies",
-    getComingSoon
-  );
 
   const onClick = (movie: Movie) => {
     setSelectedId(movie.id);
-    setSelectedImg(makeImagePath(movie.poster_path));
+    setSelectedImg(makeImagePath(`movie.poster_path`));
     setSelectedBgImg(makeImagePath(movie.backdrop_path));
   };
 
@@ -34,7 +29,11 @@ const Comings = () => {
   return (
     <>
       <main>
-        <Movies movies={movies} onClick={onClick} isLoading={isLoading} />
+        <Movies
+          onClick={onClick}
+          queryKey={["allComingMovies"]}
+          queryFn={getComingSoon}
+        />
         {/* <Container>
           {isLoading
             ? "Loading"
