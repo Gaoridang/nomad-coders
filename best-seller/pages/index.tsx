@@ -1,5 +1,7 @@
 import axios from "axios";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Link from "next/link";
+import { useEffect } from "react";
 
 interface Result {
   display_name: string;
@@ -10,10 +12,28 @@ interface Result {
 export default function Page({
   results,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  // useEffect(() => {
+  //   const data = axios
+  //     .get(
+  //       "https://books-api.nomadcoders.workers.dev/list?name=hardcover-fiction"
+  //     )
+  //     .then((res) => res.data);
+
+  //   console.log(data);
+  // }, []);
+
   return (
     <ul>
       {results.map((result) => (
-        <li key={result.list_name_encoded}>{result.display_name}</li>
+        <li key={result.list_name_encoded}>
+          <Link
+            href={{
+              pathname: `list/${result.list_name_encoded}`,
+            }}
+          >
+            {result.display_name}
+          </Link>
+        </li>
       ))}
     </ul>
   );
