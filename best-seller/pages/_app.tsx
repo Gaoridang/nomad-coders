@@ -1,5 +1,6 @@
 import Layout from "@/components/layout";
 import { AppProps } from "next/app";
+import "../styles/globals.css";
 
 interface Props {}
 
