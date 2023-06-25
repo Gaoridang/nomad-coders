@@ -46,12 +46,16 @@ const Detail = () => {
 
   return (
     <>
-      <h4>{router.query.id}</h4>
-      <div>
+      <h4>{listName}</h4>
+      <div className="flex flex-wrap">
         {isLoading && "Loading..."}
         {bestSellers?.map((best, index) => (
-          <div key={`${best.primary_isbn10}-${index}`}>
+          <div
+            key={`${best.primary_isbn10}-${index}`}
+            className="flex-row w-72 m-2 bg-slate-200"
+          >
             <Image
+              className="w-full"
               src={best.book_image}
               alt={best.title}
               width={best.book_image_width}
@@ -59,12 +63,18 @@ const Detail = () => {
               placeholder="empty"
               priority={index === 0 ? true : false}
             />
-            <button>
-              <Link href={best.buy_links[0].url}> Buy Now</Link>
-            </button>
+            <div className="p-2">
+              {best.description === "" ? (
+                <p className="mt-2 mb-2">No description</p>
+              ) : (
+                <p className="mt-2 mb-2 line-clamp-2">{best.description}</p>
+              )}
+              <button className="border-none rounded-md bg-blue-200 p-2">
+                <Link href={best.buy_links[0].url}> Buy Now</Link>
+              </button>
+            </div>
           </div>
         ))}
-        <style jsx>{``}</style>
       </div>
     </>
   );
